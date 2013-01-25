@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Backbone.js • Sample App</title>
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/underscore-min.js"></script>
+  <script src="js/lib/backbone-min.js"></script>
+  <style type="text/css">
+  .text-center{
+    text-align: center;
+  }
+  </style>
+</head>
+
+
+<body>
+	 
+    
+
+    <div class="container">
+
+
+<ul id="friends-list">
+</ul>
+
+        <h1>Maps</h1>
+      	<input class="span2 user-text" type="" placeholder="MapBox User">
+      	<button type="submit" id="submit" class="btn submit">View Maps</button>
+
+
+      </br>
+
+      <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
+          <li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+        </ul>
+        <div class="tab-content">
+
+          <div class="tab-pane active" id="tab1">
+            
+            <!-- Example row of columns -->
+            <div class="row">
+              <div class="span6">
+               <div id="here">
+               </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tab-pane" id="tab2">
+
+            <p>Howdy, I'm in Section 2.</p>
+
+          </div>
+
+        </div>
+      </div>
+      
+
+    </div> <!-- /container -->
+</body>
+    <script type="text/template" id="templ">
+      <div class="well text-center">
+        <h2 class='inline'><%= title %></h2>
+        <img src=<%= thumb %>/>
+        <p><%= description %></p>
+        <a href=<%= download %> class='btn'>Download</a>
+      </div>
+    </script>
+
+
+  <script src="js/app.js"></script>
+
+
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+</html>
+
+
