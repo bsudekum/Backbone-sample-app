@@ -1,5 +1,7 @@
 (function($) {
-Map = Backbone.Model.extend({
+
+
+var Map = Backbone.Model.extend({
 
     initialize:function(mapUnits) {
 
@@ -7,15 +9,17 @@ Map = Backbone.Model.extend({
         thumb = "http://a.tiles.mapbox.com/v3/"+mapUnits.id+"/thumb.png";
         description = mapUnits.description
         download = "'"+mapUnits.download+"'"
+        center = mapUnits.center;
         console.log(title)
 
         var compiled = _.template($("#templ").html());
-        $("#here").append(compiled(title));
+        uservalue = "#"+$('.user-text').val()
+        $(uservalue).append(compiled());
 
     }
 });
  
-mapList = Backbone.Collection.extend({
+var mapList = Backbone.Collection.extend({
     initialize: function(){
         this.bind("add", function( model ){
             view.render( model );
@@ -38,11 +42,8 @@ mapList = Backbone.Collection.extend({
         return "http://api.tiles.mapbox.com/v3/"+$('.user-text').val()+"/tilesets.json";
     }
 });
- 
 
-
-
-MapView = Backbone.View.extend({
+var MapView = Backbone.View.extend({
 
     tagName: 'li',
 
@@ -61,17 +62,32 @@ MapView = Backbone.View.extend({
     },
 
     render: function( model ) {
-        $(".nav-tabs").append("<li><a href='#"+ model.get("user")+"' data-toggle='tab'>"+ model.get("user")+"</li></a>");
-        $(".tab-content").append("<div class='tab-pane' id='"+model.get("user")+"'><p>This is user: "+model.get("user")+"</p></div>")
-        console.log('rendered')
+
+        $(".nav-tabs").append("<li><a href='#user/"+ model.get("user")+"'><a href='#"+ model.get("user")+"'  data-toggle='tab'>"+ model.get("user")+"</a></a></li>");
+
+        $(".tab-content").append("</a><div class='tab-pane' id='"+model.get("user")+"'><h3>Maps by: "+model.get("user")+"</h3></div>");
+
+
+
         s = new mapList().fetch();;
     },
 
 });
 
-var view = new MapView({el: 'body'});
 
- 
+var Router = Backbone.Router.extend({
+    
+    // routes configuration
+    routes: {
+        'user/:id' : 'defaultUser'
+    },
+    
+    
+    
+});
 
+var view = new MapView({el: 'html'});
+var router = new Router();
+Backbone.history.start();
 
 })(jQuery);
