@@ -16,9 +16,6 @@ var MainView = Backbone.View.extend({
     },
     getUser: function() {
         Backbone.navigate('user/' + $('.user-text').val());
-    },
-    render: function() {
-        $('#main').empty().append(templates.main());
     }
 });
 
@@ -38,7 +35,7 @@ var MapView = Backbone.View.extend({
 
 var Router = Backbone.Router.extend({
     initialize: function() {
-        new MainView();
+        new MainView({el: 'body'});
     },
     // routes configuration
     routes: {
