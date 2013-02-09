@@ -18,44 +18,32 @@
 
 
 <body>
-	 
-    
 
-    <div class="container">
+<h1>Maps</h1>
+  <input class="span2 user-text" type="" placeholder="MapBox User">
+  <button type="submit" id="submit" class="btn submit">View Maps</button>
 
+  <div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs"></ul>
+  <div class="tab-content"></div>
+</div>
 
-<ul id="friends-list">
-</ul>
-
-        <h1>Maps</h1>
-      	<input class="span2 user-text" type="" placeholder="MapBox User">
-      	<button type="submit" id="submit" class="btn submit">View Maps</button>
-
-
-      </br>
-
-      <div class="tabbable"> <!-- Only required for left/right tabs -->
-        <ul class="nav nav-tabs"></ul>
-        <div class="tab-content"></div>
-      </div>
-      
-
-    </div> <!-- /container -->
-</body>
-    <script type="text/template" id="templ">
-      <div class="well text-center">
-        <h2 class='inline'><%= title %></h2>
-        <img src=<%= thumb %>/>
-        <p><%= description %></p>
-        <a href=<%= download %> class='btn'>Download</a>
-      </div>
-    </script>
-
+<script data-template='map' type='text/html'>
+  <li>
+  <div class="well text-center">
+    <img src=<%= get('thumb') %>/>
+    <h2 class='inline'><%= get('name') %></h2>
+    <p><%= get('description') %></p>
+    <a href=<%= get('downloadUrl') %> class='btn'>Download</a>
+  </div>
+  </li>
+</script>
 
   <script src="js/app.js"></script>
-
-
   <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+</body>
+
 </html>
 
 
