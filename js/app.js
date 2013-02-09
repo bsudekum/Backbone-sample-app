@@ -1,5 +1,10 @@
 (function($) {
 
+var templates =  _($('script[data-template]')).reduce(function(memo, el) {
+  memo[el.getAttribute('data-template')] = _(el.innerHTML).template();
+  return memo;
+}, {});
+
 var Maps = Backbone.Collection.extend({
     initialize: function(options) {
         this.options = {};
