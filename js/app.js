@@ -5,6 +5,9 @@ var templates =  _($('script[data-template]')).reduce(function(memo, el) {
   return memo;
 }, {});
 
+
+
+
 var Maps = Backbone.Collection.extend({
     initialize: function(options) {
         this.options = {};
@@ -20,7 +23,8 @@ var MainView = Backbone.View.extend({
         'click #submit':  'getUser',
     },
     getUser: function() {
-        Backbone.navigate('user/' + $('.user-text').val());
+        Backbone.history.navigate('user/' + $('.user-text').val());
+
     }
 });
 
@@ -29,11 +33,9 @@ var MapView = Backbone.View.extend({
         this.render();
     },
     render: function() {
-        $('.maps', this.el).empty();
-        var view = this;
-        this.collection.each(function(m) {
-            $('.maps', view.el).append(templates.map(m));
-        });
+        var template = _.template( $('#user-template'), {} );
+            // Load the compiled HTML into the Backbone "el"
+            this.$el.html( template );
     }
 });
 
@@ -49,10 +51,11 @@ var Router = Backbone.Router.extend({
     userMaps: function(user) {
         // Todo: display spinner
         (new Maps({user: user})).fetch({
-            success: function(maps) {
+            success: function(map) {
                 // Render view.
-                var view = new MapView({collection: maps});
-                $('.nav-tabs').attach(view.el);
+                var view = new MapView({collection: map});
+                $('.nav-tabs').append(view.el);
+
             },
             error: function() {
                 // display some sort of error message
@@ -63,5 +66,5 @@ var Router = Backbone.Router.extend({
 
 new Router();
 Backbone.history.start();
-
+var map_view = new MapView({ el: $('.container') });
 })(jQuery);
